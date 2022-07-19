@@ -1,0 +1,28 @@
+AWSTemplateFormatVersion: 2010-09-09
+Parameters:
+  RoleName:
+    Type: String
+    Description: 'Role to use for Lambda function execution of form: arn:(aws[a-zA-Z-]*)?:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
+  S3BucketName:
+    Type: String
+    Description: "Name of S3 bucket the jar for Lambda deployment is found in."
+    Default: "bnelen-deployments"
+  S3Key:
+    Type: String
+    Description: "S3 prefix to the jar for the Lambda deployment."
+    Default: "WordCount-1.0-SNAPSHOT.jar"
+Resources:
+  CountWordsLambda:
+    Type: "AWS::Lambda::Function"
+    Properties:
+      Code:
+        S3Key:
+          Ref: S3Key
+        S3Bucket:
+          Ref: S3BucketName
+      Handler: "org.example.LambdaRequestHandler::handleRequest"
+      Role:
+        Ref: RoleName
+      Runtime: "java11"
+      Timeout: 120
+

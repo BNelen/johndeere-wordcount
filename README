@@ -1,0 +1,14 @@
+# WordCount
+Counts the number of occurrences for each word in a file downloaded from a given URL.
+
+## Setup
+A cloudformation template is provided (LambdaCloudFormation.yaml) that can be uploaded to CloudFormation to create a
+stack with a Lambda function.  There are 3 parameters for the template, the S3 bucket and key parameters are defaulted
+in case it is desired to use the artifacts available in the public accessible buckets.
+
+## Running
+Once Cloudformation creates the Lambda function, you can execute the function by navigating to the Lambda function in the AWS Console.
+From there click on the created function and select the 'Test' tab.
+For the 'Events Json' section at the bottom, erase all content and replace with the URL of some link you wish to
+execute the function on to count the words from, ensuring double quotes are around the value.
+Ex: "https://www.gutenberg.org/files/2701/2701-0.txt"
